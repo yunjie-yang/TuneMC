@@ -1,0 +1,27 @@
+{
+    "language"        : "PYTHON",
+    "main-file"       : "Spearmint-Pythia-Tune-Block1.py",
+    "experiment-name" : "Spearmint-Pythia-Tune-Block1",
+    "likelihood"      : "NOISELESS",
+    "variables" : {
+        "alphaSvalue" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : 0.06,
+            "max"  : 0.25
+        },
+        "pTmin" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : 0.1,
+            "max"  : 2.0
+        },
+        "pTminChgQ" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : 0.1,
+            "max"  : 2.0
+        }
+    }
+}
+
