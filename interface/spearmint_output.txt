@@ -1485,3 +1485,28 @@ Suggestion:     NAME          TYPE       VALUE
 Submitted job 60 with local scheduler (process id: 58293).
 Status: 1 pending, 59 complete.
 
+Fitting GP for main task...
+Getting suggestion...
+
+Minimum expected objective value under model is 119.58887 (+/- 159.75284), at location:
+                NAME          TYPE       VALUE
+                ----          ----       -----
+                pTminChgQ     float      0.837359    
+                alphaSvalue   float      0.136581    
+                pTmin         float      0.473499    
+
+Minimum of observed values is 85.615000, at location:
+                NAME          TYPE       VALUE
+                ----          ----       -----
+                pTminChgQ     float      0.705636    
+                alphaSvalue   float      0.136824    
+                pTmin         float      0.528854    
+
+Suggestion:     NAME          TYPE       VALUE
+                ----          ----       -----
+                pTminChgQ     float      0.650591    
+                alphaSvalue   float      0.136642    
+                pTmin         float      0.489923    
+Submitted job 61 with local scheduler (process id: 58339).
+Status: 1 pending, 60 complete.
+
