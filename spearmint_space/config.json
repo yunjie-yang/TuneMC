@@ -1,7 +1,7 @@
 {
     "language"        : "PYTHON",
-    "main-file"       : "Spearmint-Pythia-Tune-Block1.py",
-    "experiment-name" : "Spearmint-Pythia-Tune-Block1",
+    "main-file"       : "Spearmint-Pythia-Tune-block1.py",
+    "experiment-name" : "Spearmint-Pythia-Tune-block1",
     "likelihood"      : "NOISELESS",
     "variables" : {
         "alphaSvalue" : {
