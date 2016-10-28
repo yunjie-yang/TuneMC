@@ -56,6 +56,15 @@ int main(int argc, char* argv[])
 
   Sphericity sph(1.,2);
 
+  double C_param;
+  double D_param;
+
+  double B_W;
+  double B_T;
+
+
+  /*************    Event Loop    *****************/
+
   for (int iEvent = 0 ; iEvent < Nevents ; ++iEvent)
   {
     if (!pythia.next()) continue;
@@ -75,8 +84,7 @@ int main(int argc, char* argv[])
 
     }
 
-    double C_param;
-    double D_param;
+    /********* Sphericity Analysis *************/
 
     if (sph.analyze( pythia.event )) 
     {
@@ -92,7 +100,6 @@ int main(int argc, char* argv[])
     double b_plus      = 0.;
     double b_minus     = 0.;
     double denominator = 0.;
-
 
     /*********** Particle Loop ***************/
 
@@ -115,20 +122,80 @@ int main(int argc, char* argv[])
 
     }//end of particle loop
 
+    if (thrust_analyze_good)
+    {
+        double B_plus  = b_plus  / (2 * denominator);
+        double B_minus = b_minus / (2 * denominator);
+        B_W = max(B_plus,B_minus);
+        B_T = B_plus + B_minus;
+    }
+
 
     /*********** Fill Histograms ***************/
 
     if (bTagged == false)
     {
       hThrusts_udsc.fill(1-Thrusts);
+      hC_param_udsc.fill(C_param);
+      hD_param_udsc.fill(D_param);
+      hB_W_udsc.fill(B_W);
+      hB_T_udsc.fill(B_T);
     }
 
     if (bTagged == true)
     {
       hThrusts_b.fill(1-Thrusts);
+      hC_param_b.fill(C_param);
+      hD_param_b.fill(D_param);
+      hB_W_b.fill(B_W);
+      hB_T_b.fill(B_T);
     }
 
   }//end of event loop
+
+  /****************************************************/
+  /******  Output Parameters in Generation  ***********/
+  /****************************************************/
+
+  const int Nparms = 21;
+  char parmName[Nparms][256] = {
+        "Beams:eCM",
+        "TimeShower:alphaSvalue",
+        "TimeShower:pTmin",
+        "TimeShower:pTminChgQ",
+        "StringPT:sigma",
+        "StringZ:bLund",
+        "StringZ:aExtraSQuark",
+        "StringZ:aExtraDiquark",
+        "StringZ:rFactC",
+        "StringZ:rFactB",
+        "StringFlav:probStoUD",
+        "StringFlav:probQQtoQ",
+        "StringFlav:probSQtoQQ",
+        "StringFlav:probQQ1toQQ0",
+        "StringFlav:mesonUDvector",
+        "StringFlav:mesonSvector",
+        "StringFlav:mesonCvector",
+        "StringFlav:mesonBvector",
+        "StringFlav:etaSup",
+        "StringFlav:etaPrimeSup",
+        "StringFlav:decupletSup"
+  };
+  double parmValues[Nparms] = {0};
+
+  for (int i = 0 ; i < Nparms ; i++ )
+        {
+          parmValues[i] = pythia.parm(parmName[i]);
+        }
+
+  cout<<endl;
+  for (int i = 0 ; i < Nparms ; i++)
+      cout<<parmName[i]<<" = "<<parmValues[i]<<endl;
+  cout<<"seed    = "<<seedNumber<<endl;
+
+  /****************************************************/
+  /********   Collect Filled Histograms   *************/
+  /****************************************************/
 
   std::vector<Hist> Hists;
   std::vector<int> Nbins;
@@ -144,15 +211,13 @@ int main(int argc, char* argv[])
   Hists.push_back(hB_T_udsc);Nbins.push_back(19);
   Hists.push_back(hB_T_b);Nbins.push_back(19);
 
+
   /****************************************************/
   /***********   Output Histograms   ******************/
   /****************************************************/
 
-  std::cout<< Hists[0];
-  std::cout<< Hists[1];
-
   ofstream ofstream_bin_content;
-  ofstream_bin_content.open(out_bin_content.c_str(),std::ios::app);
+  ofstream_bin_content.open(out_bin_content.c_str());
 
   for (int iHist = 0 ; iHist < Hists.size() ; ++iHist)
   {
