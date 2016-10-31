@@ -1,0 +1,142 @@
+Job launching after 0.39 seconds in submission.
+Running python job.
+Changed into dir /Users/Yunjie/Documents/TuneMC/spearmint_space
+Importing Spearmint-Pythia-Tune-block1.py
+Running Spearmint-Pythia-Tune-block1.main()
+Anything printed here will end up in the output directory for job #86
+{u'pTminChgQ': array([ 0.39224494]), u'alphaSvalue': array([ 0.13671381]), u'pTmin': array([ 0.49468116])}
+job id = 86, time stamp = 1477685124.70
+[ 0.13671381  0.49468116  0.39224494]
+Traceback (most recent call last):
+  File "/Users/Yunjie/Documents/Spearmint/spearmint/launcher.py", line 243, in launch
+    result = python_launcher(job)
+  File "/Users/Yunjie/Documents/Spearmint/spearmint/launcher.py", line 327, in python_launcher
+    result = module.main(job['id'], params)
+  File "/Users/Yunjie/Documents/TuneMC/spearmint_space/Spearmint-Pythia-Tune-block1.py", line 73, in main
+    obj_func = get_objective_func(job_id)
+Process Process-2:
+Process Process-1:
+Traceback (most recent call last):
+Traceback (most recent call last):
+Process Process-3:
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/multiprocessing/process.py", line 258, in _bootstrap
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/multiprocessing/process.py", line 258, in _bootstrap
+Process Process-4:
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/multiprocessing/process.py", line 258, in _bootstrap
+Process Process-5:
+Process Process-6:
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/multiprocessing/process.py", line 258, in _bootstrap
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/multiprocessing/process.py", line 258, in _bootstrap
+Process Process-7:
+  File "/Users/Yunjie/Documents/TuneMC/spearmint_space/Spearmint-Pythia-Tune-block1.py", line 38, in get_objective_func
+Traceback (most recent call last):
+    MultiProc_Gen(n_cores,Nevents,WorkHOME)
+  File "/Users/Yunjie/Documents/TuneMC/pythia_space/MultiProc_GenPythia.py", line 32, in MultiProc_Gen
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/multiprocessing/process.py", line 114, in run
+    self.run()
+    self._target(*self._args, **self._kwargs)
+    self.run()
+  File "/Users/Yunjie/Documents/TuneMC/pythia_space/MultiProc_GenPythia.py", line 17, in GenPythia
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/multiprocessing/process.py", line 114, in run
+    self._target(*self._args, **self._kwargs)
+Traceback (most recent call last):
+  File "/Users/Yunjie/Documents/TuneMC/pythia_space/MultiProc_GenPythia.py", line 17, in GenPythia
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/multiprocessing/process.py", line 258, in _bootstrap
+    j.join()
+    subprocess.call([shell_command],shell=True)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/multiprocessing/process.py", line 145, in join
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 522, in call
+    subprocess.call([shell_command],shell=True)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 522, in call
+    res = self._popen.wait(timeout)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/multiprocessing/forking.py", line 154, in wait
+    self.run()
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/multiprocessing/process.py", line 114, in run
+    self.run()
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/multiprocessing/process.py", line 114, in run
+    self.run()
+    self._target(*self._args, **self._kwargs)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/multiprocessing/process.py", line 114, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Users/Yunjie/Documents/TuneMC/pythia_space/MultiProc_GenPythia.py", line 17, in GenPythia
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/multiprocessing/process.py", line 114, in run
+    subprocess.call([shell_command],shell=True)
+    self.run()
+    self._target(*self._args, **self._kwargs)
+    self._target(*self._args, **self._kwargs)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/multiprocessing/process.py", line 114, in run
+  File "/Users/Yunjie/Documents/TuneMC/pythia_space/MultiProc_GenPythia.py", line 17, in GenPythia
+  File "/Users/Yunjie/Documents/TuneMC/pythia_space/MultiProc_GenPythia.py", line 17, in GenPythia
+    self._target(*self._args, **self._kwargs)
+  File "/Users/Yunjie/Documents/TuneMC/pythia_space/MultiProc_GenPythia.py", line 17, in GenPythia
+    subprocess.call([shell_command],shell=True)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 522, in call
+    subprocess.call([shell_command],shell=True)
+    subprocess.call([shell_command],shell=True)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 522, in call
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 522, in call
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 522, in call
+  File "/Users/Yunjie/Documents/TuneMC/pythia_space/MultiProc_GenPythia.py", line 17, in GenPythia
+    return self.poll(0)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/multiprocessing/forking.py", line 135, in poll
+    subprocess.call([shell_command],shell=True)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 522, in call
+    pid, sts = os.waitpid(self.pid, flag)
+KeyboardInterrupt
+Problem executing the function
+Job failed in 12.66 seconds.
+    return Popen(*popenargs, **kwargs).wait()
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 1384, in wait
+    pid, sts = _eintr_retry_call(os.waitpid, self.pid, 0)
+    return Popen(*popenargs, **kwargs).wait()
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 476, in _eintr_retry_call
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 1384, in wait
+    return func(*args)
+    pid, sts = _eintr_retry_call(os.waitpid, self.pid, 0)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 476, in _eintr_retry_call
+    return Popen(*popenargs, **kwargs).wait()
+    return func(*args)
+KeyboardInterrupt
+    return Popen(*popenargs, **kwargs).wait()
+KeyboardInterrupt
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 1384, in wait
+/Users/Yunjie/Documents/TuneMC/pythia_space/pythia_gen 3 142858 /Users/Yunjie/Documents/TuneMC/pythia_space/parsFile.txt /Users/Yunjie/Documents/TuneMC/pythia_space/Output_csv/out_bin_content_3.csv > /Users/Yunjie/Documents/TuneMC/pythia_space/Output_text/Output_3.txt 2>&1
+    return Popen(*popenargs, **kwargs).wait()
+/Users/Yunjie/Documents/TuneMC/pythia_space/pythia_gen 6 142858 /Users/Yunjie/Documents/TuneMC/pythia_space/parsFile.txt /Users/Yunjie/Documents/TuneMC/pythia_space/Output_csv/out_bin_content_6.csv > /Users/Yunjie/Documents/TuneMC/pythia_space/Output_text/Output_6.txt 2>&1
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 1384, in wait
+    return Popen(*popenargs, **kwargs).wait()
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 1384, in wait
+    pid, sts = _eintr_retry_call(os.waitpid, self.pid, 0)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 476, in _eintr_retry_call
+    pid, sts = _eintr_retry_call(os.waitpid, self.pid, 0)
+    return func(*args)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 476, in _eintr_retry_call
+    return func(*args)
+KeyboardInterrupt
+KeyboardInterrupt
+/Users/Yunjie/Documents/TuneMC/pythia_space/pythia_gen 2 142858 /Users/Yunjie/Documents/TuneMC/pythia_space/parsFile.txt /Users/Yunjie/Documents/TuneMC/pythia_space/Output_csv/out_bin_content_2.csv > /Users/Yunjie/Documents/TuneMC/pythia_space/Output_text/Output_2.txt 2>&1
+/Users/Yunjie/Documents/TuneMC/pythia_space/pythia_gen 1 142858 /Users/Yunjie/Documents/TuneMC/pythia_space/parsFile.txt /Users/Yunjie/Documents/TuneMC/pythia_space/Output_csv/out_bin_content_1.csv > /Users/Yunjie/Documents/TuneMC/pythia_space/Output_text/Output_1.txt 2>&1
+    return Popen(*popenargs, **kwargs).wait()
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 1384, in wait
+    pid, sts = _eintr_retry_call(os.waitpid, self.pid, 0)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 476, in _eintr_retry_call
+    return func(*args)
+KeyboardInterrupt
+/Users/Yunjie/Documents/TuneMC/pythia_space/pythia_gen 4 142858 /Users/Yunjie/Documents/TuneMC/pythia_space/parsFile.txt /Users/Yunjie/Documents/TuneMC/pythia_space/Output_csv/out_bin_content_4.csv > /Users/Yunjie/Documents/TuneMC/pythia_space/Output_text/Output_4.txt 2>&1
+    pid, sts = _eintr_retry_call(os.waitpid, self.pid, 0)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 476, in _eintr_retry_call
+    return func(*args)
+KeyboardInterrupt
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 1384, in wait
+/Users/Yunjie/Documents/TuneMC/pythia_space/pythia_gen 0 142858 /Users/Yunjie/Documents/TuneMC/pythia_space/parsFile.txt /Users/Yunjie/Documents/TuneMC/pythia_space/Output_csv/out_bin_content_0.csv > /Users/Yunjie/Documents/TuneMC/pythia_space/Output_text/Output_0.txt 2>&1
+    pid, sts = _eintr_retry_call(os.waitpid, self.pid, 0)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 476, in _eintr_retry_call
+    return func(*args)
+KeyboardInterrupt
+/Users/Yunjie/Documents/TuneMC/pythia_space/pythia_gen 5 142858 /Users/Yunjie/Documents/TuneMC/pythia_space/parsFile.txt /Users/Yunjie/Documents/TuneMC/pythia_space/Output_csv/out_bin_content_5.csv > /Users/Yunjie/Documents/TuneMC/pythia_space/Output_text/Output_5.txt 2>&1
+(<type 'exceptions.KeyboardInterrupt'>, KeyboardInterrupt(), <traceback object at 0x105e61dd0>)

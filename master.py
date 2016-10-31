@@ -1,32 +1,14 @@
-import numpy as np
-import subprocess
 import os
+from utils.utils import load_config,start_spearmint_tune
 
-def start_tune(spearmint_dir,WorkHOME,New_Tune):
+def main():
+    config = load_config('tune_config.json') 
+    WorkHOME = config['WorkHOME']
+    spearmint_dir = config['spearmint_dir']
     
-    record_files = ['{}/interface/results.csv'.format(WorkHOME),
-                    '{}/interface/time_stamps.csv'.format(WorkHOME),
-                    '{}/interface/objectives.csv'.format(WorkHOME)]
-    
-    
-    if not New_Tune:
-        cont_command = 'python {}/main.py {}/spearmint_space 2>&1 |tee -a {}/interface/spearmint_output.txt'.format(
-            spearmint_dir,WorkHOME,WorkHOME)
-        subprocess.call([cont_command],shell=True)
-    if New_Tune:
-        subprocess.call(['{}/cleanup.sh {}/spearmint_space'.format(spearmint_dir,WorkHOME)],shell=True)
-        
-        for ifile in record_files:
-            if os.path.exists(ifile):
-                os.remove(ifile)
-        new_command = 'python {}/main.py {}/spearmint_space 2>&1 | tee {}/interface/spearmint_output.txt'.format(
-            spearmint_dir,WorkHOME,WorkHOME)
-        subprocess.call([new_command],shell=True)
+    os.environ['WorkHOME'] = WorkHOME
 
-WorkHOME = '/Users/Yunjie/Documents/TuneMC'
-os.environ['WorkHOME'] = WorkHOME
+    start_spearmint_tune(spearmint_dir,WorkHOME,True)
 
-spearmint_dir = '/Users/Yunjie/Documents/Spearmint/spearmint'
-
-start_tune(spearmint_dir,WorkHOME,True)
-
+if __name__ == '__main__':
+    main()

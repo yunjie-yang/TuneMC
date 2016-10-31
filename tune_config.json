@@ -1,0 +1,9 @@
+{
+  "WorkHOME" : "/Users/Yunjie/Documents/TuneMC",
+  "N_events" : 7000,
+  "n_cores"  : 7,
+  "block1"   : "True",
+  "block2"   : "False",
+  "block3"   : "False",
+  "spearmint_dir"  : "/Users/Yunjie/Documents/Spearmint/spearmint"
+}
