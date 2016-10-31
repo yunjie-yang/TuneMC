@@ -7,10 +7,10 @@
 
 #ignore on-file tuning results
 
-./spearmint_space/output/*
-./spearmint_space/Plots/*
+./spearmint_space/output/**
+./spearmint_space/Plots/**
 
-./results/*
+./results/**
 
 ./pythia_space/Output_text
 ./pythia_space/Output_csv
