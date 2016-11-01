@@ -59,4 +59,5 @@ Minimum of observed values is 4107.460000, at location:
                 ----          ----       -----
                 pTminChgQ     float      1.050000    
                 alphaSvalue   float      0.155000    
-                pTmin         float      1.050000    
+                pTmin         float      1.050000   
+ 
