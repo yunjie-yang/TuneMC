@@ -6,45 +6,10 @@ sys.path.append(WorkHOME)
 import numpy as np
 import csv
 import subprocess
+import json
 from time import time
-from pythia_space.gen_parsFile import gen_parsFile
-from pythia_space.MultiProc_GenPythia import MultiProc_Gen
-from pythia_space.output_tasks import combine_output,get_chi2
+from pythia_space.pythia_functions import get_objective_func
 
-n_cores = 7
-Nevents = 142858
-
-bin_widths = [0.025,0.025,0.05,0.05,0.032,0.032,0.015,0.015,0.02,0.02]
-
-csv_Dir = '{}/pythia_space/Output_csv'.format(WorkHOME)
-
-outputFile_bin_contents = '{}/output_bin_contents.csv'.format(csv_Dir)
-outputFile_bin_errors   = '{}/output_bin_errors.csv'.format(csv_Dir)
-
-object_contents = '{}/output_bin_contents_Monash.csv'.format(csv_Dir)
-object_errors   = '{}/output_bin_errors_Monash.csv'.format(csv_Dir)
-
-tune_contents   = '{}/output_bin_contents.csv'.format(csv_Dir)
-tune_errors     = '{}/output_bin_errors.csv'.format(csv_Dir)
-
-obj_file        = '{}/interface/objectives.csv'.format(WorkHOME)
-
-def get_objective_func(job_id):
-
-    pars_inputFile = '{}/interface/next_point_to_sample.csv'.format(WorkHOME)
-    pars_outputFile = '{}/pythia_space/parsFile.txt'.format(WorkHOME)
-    gen_parsFile(pars_inputFile,pars_outputFile)
-
-    MultiProc_Gen(n_cores,Nevents,WorkHOME)
-
-    combine_output(n_cores,csv_Dir,bin_widths,outputFile_bin_contents,outputFile_bin_errors)
-
-    chi2 = get_chi2(object_contents,object_errors,tune_contents,tune_errors,obj_file)
-
-    result = float(round(chi2,3))
-
-    print 'Result = %f' % result
-    return result
 
 def main(job_id, params):
     print 'Anything printed here will end up in the output directory for job #%d' % job_id
