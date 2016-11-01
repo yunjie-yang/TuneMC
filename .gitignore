@@ -7,13 +7,11 @@
 
 #ignore on-file tuning results
 
-to_be_ignored/**
-!to_be_ignored/.gitkeep
-
 interface/**
 !interface/.gitkeep
 
 spearmint_space/output/**
+!spearmint_space/output/.gitkeep
 spearmint_space/Plots/**
 !spearmint_space/Plots/.gitkeep
 

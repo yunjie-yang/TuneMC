@@ -15,6 +15,12 @@ def start_spearmint_tune(spearmint_dir,WorkHOME,New_Tune):
     if New_Tune:
         subprocess.call(['{}/cleanup.sh {}/spearmint_space'.format(spearmint_dir,WorkHOME)],shell=True)
 
+	output_dir = '{}/spearmint_space/output'.format(WorkHOME)
+        if not os.path.exists(output_dir):
+	    os.makedirs(output_dir)
+	with open('{}/.gitkeep'.format(output_dir),'w') as gitkeep_file:
+	    gitkeep_file.write("spearmint output dir")
+
         for ifile in record_files:
             if os.path.exists(ifile):
                 os.remove(ifile)
