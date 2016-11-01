@@ -9,16 +9,7 @@ from math import sqrt
 
 WorkHOME = os.environ['WorkHOME']
 
-def load_config(config_file):
-    try:
-        with open(config_file,'r') as json_file:
-            json_data = json.load(json_file)
-            return json_data
-    except:
-        raise Exception('setup.json loading failed. Please check commas or parentheses?')
-
-
-def get_objective_func(job_id):
+def get_objective_func(params):
 
     bin_widths = [0.025,0.025,0.05,0.05,0.032,0.032,0.015,0.015,0.02,0.02]
 
@@ -35,9 +26,11 @@ def get_objective_func(job_id):
 
     obj_file        = '{}/interface/objectives.csv'.format(WorkHOME)
 
-    pars_inputFile = '{}/interface/next_point_to_sample.csv'.format(WorkHOME)
-    pars_outputFile = '{}/pythia_space/parsFile.txt'.format(WorkHOME)
-    gen_parsFile(pars_inputFile,pars_outputFile)
+    #pars_inputFile = '{}/interface/next_point_to_sample.csv'.format(WorkHOME)
+    pars_outputFile = '{}/pythia_space/pythia_input.txt'.format(WorkHOME)
+
+    #gen_pythia_input_from_file(pars_inputFile,pars_outputFile)
+    gen_pythia_input_from_dict(params,pars_outputFile)
 
     config_file = '{}/tune_config.json'.format(WorkHOME)
 
@@ -63,7 +56,7 @@ def get_objective_func(job_id):
     return result
 
 
-def gen_parsFile(inputFile,outputFile):
+def gen_pythia_input_from_file(inputFile,outputFile):
     
     with open(inputFile, 'rb') as f:
         reader = csv.reader(f)
@@ -105,11 +98,49 @@ def gen_parsFile(inputFile,outputFile):
         
     output.close()
     
-    print pars
+
+def gen_pythia_input_from_dict(params,outputFile):
+
+    WorkHOME = os.environ['WorkHOME']
+    
+    if os.path.exists(outputFile):
+        os.remove(outputFile)
+
+    output = open(outputFile,'a')
+
+    basic_info = [
+        "Tune:ee = 7",
+        "Beams:idA = 11",
+        "Beams:idB = -11",
+        "Beams:eCM = 91.2",
+        "WeakSingleBoson:ffbar2gmZ = on",
+        "23:onMode = off",
+        "23:onIfMatch = 1 -1",
+        "23:onIfMatch = 2 -2",
+        "23:onIfMatch = 3 -3",
+        "23:onIfMatch = 4 -4",
+        "23:onIfMatch = 5 -5"
+    ]
+
+    for info_line in basic_info:
+        output.write("{}\n".format(info_line))
+
+    with open('{}/pythia_space/pars_to_tune.txt'.format(WorkHOME),'r') as parsList:
+        param_names = parsList.read().splitlines()
+        
+    pars_info = load_config('{}/utils/all_pars_dict.json'.format(WorkHOME))
+
+    for index, param_name in enumerate(param_names):
+        category = pars_info[param_name]['category']
+        value = params[param_name][0]
+        output.write("{}:{} = {}\n".format(category,param_name,value))
+
+    output.close()
+
 
 def GenPythia(job_id,Nevents,WorkHOME):
     PythiaSpaceDir=WorkHOME+'/pythia_space'
-    PythiaInputFile=PythiaSpaceDir+'/parsFile.txt'
+    PythiaInputFile=PythiaSpaceDir+'/pythia_input.txt'
     Dir_OutputText=PythiaSpaceDir+'/Output_text'
     Dir_OutputCSV=PythiaSpaceDir+'/Output_csv'
     shell_command = '{}/pythia_gen {} {} {} {}/out_bin_content_{}.csv > {}/Output_{}.txt 2>&1'.format(PythiaSpaceDir,int(job_id),Nevents,
@@ -261,4 +292,12 @@ def get_chi2(object_contents,object_errors,tune_contents,tune_errors,output_file
     ofile.close()
 
     return sum_chi2
+
+def load_config(config_file):
+    try:
+        with open(config_file,'r') as json_file:
+            json_data = json.load(json_file)
+            return json_data
+    except:
+        raise Exception('json file loading failed. Please check commas or parentheses?')
 

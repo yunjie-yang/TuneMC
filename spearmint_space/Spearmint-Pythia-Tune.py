@@ -19,13 +19,14 @@ def main(job_id, params):
 
     print "job id = {0:d}, time stamp = {1:.2f}".format(job_id,timeStamp)
 
-    param_names = ['alphaSvalue','pTmin','pTminChgQ']
+    with open('{}/pythia_space/pars_to_tune.txt'.format(WorkHOME),'r') as parsList:
+        param_names = parsList.read().splitlines()
 
-    n_params = len(param_names)
 
     next_point_raw=[]
-    for i in range(n_params):
-	next_point_raw.append(params[param_names[i]][0])
+
+    for param_name in param_names:
+	next_point_raw.append(params[param_name][0])
 
     next_point = np.array(next_point_raw).copy()
 
@@ -35,7 +36,7 @@ def main(job_id, params):
     Parfile.close()
 
     parm_start = time()
-    obj_func = get_objective_func(job_id)
+    obj_func = get_objective_func(params)
     parm_end   = time()
     parm_time  = float(round(parm_end - parm_start,2))
 
