@@ -8,17 +8,19 @@
 #ignore on-file tuning results
 
 ./spearmint_space/output/*
-#!./spearmint_space/output/.gitignore
-#./spearmint_space/Plots/*
-#!./spearmint_space/Plots/.gitignore
+#!./spearmint_space/output/.gitkeep
+./spearmint_space/Plots/*
+!./spearmint_space/Plots/.gitkeep
 
-#./results/*
-#!./results/.gitignore
+./results/*
+!./results/.gitkeep
 
-#./pythia_space/Output_text/*
-#!./pythia_space/Output_text/.gitignore
-#./pythia_space/Output_csv/*
-#!./pythia_space/Output_csv/.gitignore
+./pythia_space/Output_text/*
+!./pythia_space/Output_text/.gitkeep
+./pythia_space/Output_csv/*
+!./pythia_space/Output_csv/.gitkeep
+!./pythia_space/Output_csv/output_bin_errors_Monash.csv
+!./pythia_space/Output_csv/output_bin_contents_Monash.csv
 
 
 #ipython notebook
