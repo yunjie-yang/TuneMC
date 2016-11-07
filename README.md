@@ -2,6 +2,7 @@ TuneMC
 =====================================================
 
 TuneMC is an example framework for Monte Carlo (MC) event generator tuning using Bayesian optimization. It provides the code realization for the method described in the following article:
+
     Event generator tuning using Bayesian optimization
     Philip Ilten, Mike Williams, Yunjie Yang
     [arXiv:1610.08328](https://arxiv.org/abs/1610.08328)
