@@ -9,9 +9,17 @@ import pandas as pd
 import os
 import shutil
 
-#WorkHOME = os.environ['WorkHOME']
+from utils.general_utils import load_config,str_to_bool
 
-WorkHOME = '/Users/Yunjie/Documents/TuneMC'
+
+config = load_config('tune_config.json')
+WorkHOME = config['WorkHOME']
+
+all_pars_dict = load_config('{}/utils/all_pars_dict.json'.format(WorkHOME))
+
+blocks = []
+for i in range(1,4):
+    blocks.append(str_to_bool(config['block{}'.format(i)]))
 
 TextsDir = '{}/interface'.format(WorkHOME)
 PlotsDir = '{}/spearmint_space/Plots'.format(WorkHOME)
@@ -43,27 +51,46 @@ def getKey(item):
 
 def main():
 
-    param_names = ['alphaSvalue','pTmin','pTminChgQ']
+    with open('{}/pythia_space/pars_to_tune.txt'.format(WorkHOME),'r') as parsList:
+        param_names = parsList.read().splitlines()
 
-    #order that shows up in Spearmint output
-    param_order = ['pTminChgQ','alphaSvalue','pTmin']
+    param_order = find_order()
 
-    MonashValues = np.array([0.1365, 0.5, 0.5]).astype(float)
+    MonashValues = [] 
+    param_ranges = []
+    for par in param_names:
+        MonashValues.append(all_pars_dict[par]['Monash'])
+	param_ranges.append((all_pars_dict[par]['min'],all_pars_dict[par]['max']))
 
-    param_ranges = [(0.06,0.25),(0.1,2.0),(0.1,2.0)]
 
     header = ['obj'] + param_names + ['job_id']
 
-    spectra_names  =   ["hThrusts_udsc", "hThrusts_b",
-                        "hC_param_udsc", "hC_param_b",
-                        "hD_param_udsc", "hD_param_b",
-                        "hB_W_udsc","hB_W_b",
-                        "hB_T_udsc","hB_T_b"]
+    spectra_names_block1  =  ["hThrusts_udsc", "hThrusts_b",
+                              "hC_param_udsc", "hC_param_b",
+                              "hD_param_udsc", "hD_param_b",
+                              "hB_W_udsc","hB_W_b",
+                              "hB_T_udsc","hB_T_b"]
+
+    spectra_names_block2  =  ["hChargeMulti_udsc","hChargeMulti_b",
+                              "hMomentFrac_udsc","hMomentFrac_b",
+                              "hMomentFrac_Dstar","hMomentFrac_bWeak"]
+
+    spectra_names_block3  =  ["hMesonFrac","hBaryonFrac",
+                              "hCharmRates","hBeautyRates"]
+
+    spectra = [spectra_names_block1,spectra_names_block2,spectra_names_block3]
+
+    spectra_names = []
+
+    for index,block in enumerate(blocks):
+	if block:
+	    spectra_names += spectra[index]
+
 
     param_nRows = 3
-    param_nCols = 1
+    param_nCols = 2
 
-    spectra_nRows = 5
+    spectra_nRows = 3
     spectra_nCols = 2
 
     #################################################################
@@ -383,6 +410,40 @@ def main():
 	BestModelFileWriter.writerow(row)
 	BestModelFile.close()
     '''
+
+
+def find_order():
+    
+    inFile = open(Spearmint_output_FILE)
+    lines = list(inFile)
+    inFile.seek(0)
+
+    param_order = []
+    found = False
+    index = 0
+    
+    while not found:
+        line = lines[index]
+        lo_index = line.find("Minimum expected objective value under model is")
+        str_len  = len("Minimum expected objective value under model is")
+        up_index = line.find("(+/-")
+        
+        if lo_index != -1 and up_index !=-1:
+                current_param_index = index+3
+                value_start_index=lines[current_param_index-1].find("----")
+                value_end_index = value_start_index+13
+                for ind,line in enumerate(lines[current_param_index:current_param_index+len(param_names)]): 
+                    string = str(line[value_start_index:value_end_index])
+                    string = string.replace(" ","")
+                    for param in param_names:
+                        if string in param:
+                            param_order.append(param)
+                found = True
+                    
+        index += 1
+        
+    return param_order
+
 
 if __name__=='__main__':
     main()

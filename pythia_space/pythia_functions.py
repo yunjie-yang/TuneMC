@@ -11,7 +11,8 @@ WorkHOME = os.environ['WorkHOME']
 
 def get_objective_func(params):
 
-    bin_widths = [0.025,0.025,0.05,0.05,0.032,0.032,0.015,0.015,0.02,0.02]
+    bin_widths_block1 = [0.025,0.025,0.05,0.05,0.032,0.032,0.015,0.015,0.02,0.02]
+    bin_widths_block2 = [0.2,0.2,0.05,0.05]
 
     csv_Dir = '{}/pythia_space/Output_csv'.format(WorkHOME)
 
@@ -26,10 +27,8 @@ def get_objective_func(params):
 
     obj_file        = '{}/interface/objectives.csv'.format(WorkHOME)
 
-    #pars_inputFile = '{}/interface/next_point_to_sample.csv'.format(WorkHOME)
     pars_outputFile = '{}/pythia_space/pythia_input.txt'.format(WorkHOME)
 
-    #gen_pythia_input_from_file(pars_inputFile,pars_outputFile)
     gen_pythia_input_from_dict(params,pars_outputFile)
 
     config_file = '{}/tune_config.json'.format(WorkHOME)
@@ -46,9 +45,16 @@ def get_objective_func(params):
 
     MultiProc_Gen(n_cores,Nevents,WorkHOME)
 
-    combine_output(n_cores,csv_Dir,bin_widths,outputFile_bin_contents,outputFile_bin_errors)
+    combine_output(n_cores,csv_Dir,bin_widths_block1,bin_widths_block2,outputFile_bin_contents,outputFile_bin_errors)
 
-    chi2 = get_chi2(object_contents,object_errors,tune_contents,tune_errors,obj_file)
+    blocks = []
+    for i in range(1,4):
+        blocks.append(str_to_bool(config['block{}'.format(i)]))
+
+    #if os.path.exists(obj_file):
+    #    os.remove(obj_file)
+
+    chi2 = get_chi2(blocks,object_contents,object_errors,tune_contents,tune_errors,obj_file)
 
     result = float(round(chi2,3))
 
@@ -193,7 +199,7 @@ def compute_chi2(o_value,o_error,t_value,t_error):
     else:
         return 0.
 
-def combine_output(n_cores,csv_Dir,bin_widths,outputFile_bin_contents,outputFile_bin_errors):
+def combine_output(n_cores,csv_Dir,bin_widths_block1,bin_widths_block2,outputFile_bin_contents,outputFile_bin_errors):
     input_files = []
     for i_job in range(n_cores):
         input_files.append('{}/out_bin_content_{}.csv'.format(csv_Dir,i_job))
@@ -205,7 +211,7 @@ def combine_output(n_cores,csv_Dir,bin_widths,outputFile_bin_contents,outputFile
             reader = csv.reader(f)
             data_list = []
             for row in reader:
-                data_list.append([int(i) for i in row])
+                data_list.append([float(i) for i in row])
             data_array = np.array(data_list)
         if index == 0:
             combined_bin_content = data_array.copy()
@@ -216,23 +222,101 @@ def combine_output(n_cores,csv_Dir,bin_widths,outputFile_bin_contents,outputFile
     output_bin_contents = []
     output_bin_errors   = []
 
-    for ihist, hist in enumerate(combined_bin_content):
+    N_total   = 0
+    N_udsc    = 0
+    N_bTagged = 0
+    
+    #first 10: block1
+    for ihist, hist in enumerate(combined_bin_content[0:10]):
         content_row = []
         error_row = []
         row_sum = 0
+        
+        if ihist == 0:
+            for ibin in hist:
+                N_total += ibin
+                N_udsc  += ibin
+
+        if ihist == 1:
+            for ibin in hist:
+                N_total   += ibin
+                N_bTagged += ibin
 
         for ibin in range(1,len(hist)-1):
-            row_sum += bin_widths[ihist]*hist[ibin]
-
+            row_sum += bin_widths_block1[ihist]*hist[ibin]
+        
+        bin_by_bin_normalize(combined_bin_content[ihist],row_sum,output_bin_contents,output_bin_errors)
+    
+    #next 6: block2
+    
+    bin_by_bin_normalize(combined_bin_content[10],float(N_udsc),output_bin_contents,output_bin_errors)
+    bin_by_bin_normalize(combined_bin_content[11],float(N_bTagged),output_bin_contents,output_bin_errors)
+        
+    for ihist,hist in enumerate(combined_bin_content[12:16]):
+        row_sum = 0
+        
         for ibin in range(1,len(hist)-1):
-            content = hist[ibin]/row_sum
-            content_row.append(content)
-            error = Get_Ratio_Error_Numbers(hist[ibin],row_sum)
-            error_row.append(error)
+            row_sum += bin_widths_block2[ihist]*hist[ibin]
+        
+        bin_by_bin_normalize(combined_bin_content[ihist+12],row_sum,output_bin_contents,output_bin_errors)
 
-        output_bin_contents.append(content_row)
-        output_bin_errors.append(error_row)
+    
+    #final 4: block3
+    nCh_total = float(combined_bin_content[20][0])   
+    
+    #mesons
+    mesons_content_row = []
+    mesons_error_row   = []
+    for ibin in combined_bin_content[16]:
+        mesons_content_row.append(ibin/nCh_total)
+        mesons_error_row.append(Get_Ratio_Error_Numbers(ibin,nCh_total))
+    
+    n_pi    = float(combined_bin_content[16][0])
+    n_K     = float(combined_bin_content[16][2])
+    n_Kstar = float(combined_bin_content[16][7])
+    n_phi   = float(combined_bin_content[16][9])
+    
+    mesons_content_row.append(n_Kstar/n_K)
+    mesons_error_row.append(Get_Ratio_Error_Numbers(n_Kstar,n_K))
+    
+    mesons_content_row.append(n_phi/n_Kstar)
+    mesons_error_row.append(Get_Ratio_Error_Numbers(n_phi,n_Kstar))
 
+    mesons_content_row.append(n_phi/n_K)
+    mesons_error_row.append(Get_Ratio_Error_Numbers(n_phi,n_K))
+
+    mesons_content_row.append(n_phi/n_pi)
+    mesons_error_row.append(Get_Ratio_Error_Numbers(n_phi,n_pi))
+            
+    output_bin_contents.append(mesons_content_row)
+    output_bin_errors.append(mesons_error_row)
+    
+    #baryons
+    baryons_content_row = []
+    baryons_error_row   = []
+
+    for ibin in combined_bin_content[17]:
+        baryons_content_row.append(ibin/nCh_total)
+        baryons_error_row.append(Get_Ratio_Error_Numbers(ibin,nCh_total))
+
+    n_p      = float(combined_bin_content[17][0])
+    n_Lambda = float(combined_bin_content[17][1])
+    
+    baryons_content_row.insert(2,n_Lambda/n_p)
+    baryons_error_row.insert(2,Get_Ratio_Error_Numbers(n_Lambda,n_p))
+    
+    baryons_content_row.insert(3,n_Lambda/n_K)
+    baryons_error_row.insert(3,Get_Ratio_Error_Numbers(n_Lambda,n_K))
+
+    output_bin_contents.append(baryons_content_row)
+    output_bin_errors.append(baryons_error_row)
+    
+    #charm and beauty
+    combined_bin_content[19][7] *= 10
+    for ihist,hist in enumerate(combined_bin_content[18:20]):
+        bin_by_bin_normalize_rates(combined_bin_content[ihist+18],float(N_total),output_bin_contents,output_bin_errors)
+    
+    
     content_file = open(outputFile_bin_contents,'w')
     content_file_writer = csv.writer(content_file,delimiter =',',
                                      quotechar=" ",lineterminator="\n",quoting=csv.QUOTE_ALL)
@@ -247,8 +331,34 @@ def combine_output(n_cores,csv_Dir,bin_widths,outputFile_bin_contents,outputFile
     content_file.close()
     error_file.close()
 
-def get_chi2(object_contents,object_errors,tune_contents,tune_errors,output_file):
+def bin_by_bin_normalize(hist,norm,output_content,output_error):
+    content_row = []
+    error_row   = []
 
+    for ibin in range(1,len(hist)-1):
+        content = hist[ibin]/norm
+        content_row.append(content)
+        error = Get_Ratio_Error_Numbers(hist[ibin],norm)
+        error_row.append(error) 
+
+    output_content.append(content_row)
+    output_error.append(error_row)
+
+def bin_by_bin_normalize_rates(hist,norm,output_content,output_error):
+    content_row = []
+    error_row   = []
+
+    for ibin in range(len(hist)):
+        content = hist[ibin]/norm
+        content_row.append(content)
+        error = Get_Ratio_Error_Numbers(hist[ibin],norm)
+        error_row.append(error) 
+
+    output_content.append(content_row)
+    output_error.append(error_row)
+
+def get_chi2(blocks,object_contents,object_errors,tune_contents,tune_errors,output_file):
+    
     input_files = [object_contents,object_errors,tune_contents,tune_errors]
 
     lists = []
@@ -261,7 +371,6 @@ def get_chi2(object_contents,object_errors,tune_contents,tune_errors,output_file
                 data_list.append([float(i) for i in row])
             lists.append(np.array(data_list))
 
-    sum_chi2 = 0
     chi2s    = []
 
     ofile = open(output_file,'a')
@@ -286,12 +395,23 @@ def get_chi2(object_contents,object_errors,tune_contents,tune_errors,output_file
             ihist_chi2 += chi2
 
         chi2s.append(ihist_chi2)
-        sum_chi2 += ihist_chi2
-
+        
+        
+    result_chi2 = 0.
+    for index,chi2 in enumerate(chi2s):
+        if blocks[0] and index >= 0  and index < 10:
+            result_chi2 += chi2
+        if blocks[1] and index >= 10 and index < 16:
+            result_chi2 += chi2
+        if blocks[2] and index >= 16 and index < 19:
+            result_chi2 += chi2
+        
+    
+        
     ofile_writer.writerow(chi2s)
     ofile.close()
 
-    return sum_chi2
+    return result_chi2
 
 def load_config(config_file):
     try:
@@ -300,4 +420,12 @@ def load_config(config_file):
             return json_data
     except:
         raise Exception('json file loading failed. Please check commas or parentheses?')
+
+def str_to_bool(s):
+    if s == 'True':
+         return True
+    elif s == 'False':
+         return False
+    else:
+         raise ValueError("Cannot covert string {} to a bool.".format(s))
 

@@ -1,13 +1,13 @@
 import shutil
 import os
-from utils.utils import load_config
+from utils.general_utils import load_config
 
-setup = load_config('tune_config.json')
+config = load_config('tune_config.json')
 
-WorkHOME = setup['WorkHOME']
+WorkHOME = config['WorkHOME']
 
 
-File_Key = '1028_block1_70'
+File_Key = '1105_block2_70'
 
 TextsDir = '{}/interface'.format(WorkHOME)
 PlotsDir = '{}/spearmint_space/Plots'.format(WorkHOME)

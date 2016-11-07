@@ -1,24 +1,72 @@
 {
-    "experiment-name": "block1", 
+    "experiment-name": "block3", 
     "language": "PYTHON", 
     "likelihood": "NOISELESS", 
     "main-file": "Spearmint-Pythia-Tune.py", 
     "variables": {
-        "alphaSvalue": {
-            "max": 0.25, 
-            "min": 0.06, 
+        "decupletSup": {
+            "max": 1.0, 
+            "min": 0.001, 
             "size": 1, 
             "type": "FLOAT"
         }, 
-        "pTmin": {
-            "max": 2.0, 
-            "min": 0.1, 
+        "etaPrimeSup": {
+            "max": 1.0, 
+            "min": 0.001, 
             "size": 1, 
             "type": "FLOAT"
         }, 
-        "pTminChgQ": {
-            "max": 2.0, 
-            "min": 0.1, 
+        "etaSup": {
+            "max": 1.0, 
+            "min": 0.001, 
+            "size": 1, 
+            "type": "FLOAT"
+        }, 
+        "mesonBvector": {
+            "max": 3.0, 
+            "min": 0.001, 
+            "size": 1, 
+            "type": "FLOAT"
+        }, 
+        "mesonCvector": {
+            "max": 3.0, 
+            "min": 0.001, 
+            "size": 1, 
+            "type": "FLOAT"
+        }, 
+        "mesonSvector": {
+            "max": 3.0, 
+            "min": 0.001, 
+            "size": 1, 
+            "type": "FLOAT"
+        }, 
+        "mesonUDvector": {
+            "max": 3.0, 
+            "min": 0.001, 
+            "size": 1, 
+            "type": "FLOAT"
+        }, 
+        "probQQ1toQQ0": {
+            "max": 1.0, 
+            "min": 0.001, 
+            "size": 1, 
+            "type": "FLOAT"
+        }, 
+        "probQQtoQ": {
+            "max": 1.0, 
+            "min": 0.001, 
+            "size": 1, 
+            "type": "FLOAT"
+        }, 
+        "probSQtoQQ": {
+            "max": 1.0, 
+            "min": 0.001, 
+            "size": 1, 
+            "type": "FLOAT"
+        }, 
+        "probStoUD": {
+            "max": 1.0, 
+            "min": 0.001, 
             "size": 1, 
             "type": "FLOAT"
         }

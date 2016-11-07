@@ -1,3 +1,11 @@
-alphaSvalue
-pTminChgQ
-pTmin
+probStoUD
+etaSup
+probQQ1toQQ0
+mesonSvector
+mesonUDvector
+probQQtoQ
+mesonBvector
+etaPrimeSup
+probSQtoQQ
+decupletSup
+mesonCvector

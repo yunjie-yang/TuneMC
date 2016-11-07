@@ -11,17 +11,17 @@ def generate_pars_dict():
                  'aExtraDiquark':{'min':0.0,'max':2.0,'Monash':0.97,'block':2,'category':'StringZ'},
                  'rFactC':{'min':0.0,'max':2.0,'Monash':1.32,'block':2,'category':'StringZ'},
                  'rFactB':{'min':0.0,'max':2.0,'Monash':0.855,'block':2,'category':'StringZ'},
-                 'probStoUD':{'min':0.0,'max':1.0,'Monash':0.217,'block':3,'category':'StringFlav'},
-                 'probQQtoQ':{'min':0.0,'max':1.0,'Monash':0.081,'block':3,'category':'StringFlav'},
-                 'probSQtoQQ':{'min':0.0,'max':1.0,'Monash':0.915,'block':3,'category':'StringFlav'},
-                 'probQQ1toQQ0':{'min':0.0,'max':1.0,'Monash':0.0275,'block':3,'category':'StringFlav'},
-                 'etaSup':{'min':0.0,'max':1.0,'Monash':0.6,'block':3,'category':'StringFlav'},
-                 'etaPrimeSup':{'min':0.0,'max':1.0,'Monash':1.0,'block':3,'category':'StringFlav'},
-                 'decupletSup':{'min':0.0,'max':1.0,'Monash':1.0,'block':3,'category':'StringFlav'},
-                 'mesonUDvector':{'min':0.0,'max':3.0,'Monash':0.5,'block':3,'category':'StringFlav'},
-                 'mesonSvector':{'min':0.0,'max':3.0,'Monash':0.55,'block':3,'category':'StringFlav'},
-                 'mesonCvector':{'min':0.0,'max':3.0,'Monash':0.88,'block':3,'category':'StringFlav'},
-                 'mesonBvector':{'min':0.0,'max':3.0,'Monash':2.2,'block':3,'category':'StringFlav'}
+                 'probStoUD':{'min':0.001,'max':1.0,'Monash':0.217,'block':3,'category':'StringFlav'},
+                 'probQQtoQ':{'min':0.001,'max':1.0,'Monash':0.081,'block':3,'category':'StringFlav'},
+                 'probSQtoQQ':{'min':0.001,'max':1.0,'Monash':0.915,'block':3,'category':'StringFlav'},
+                 'probQQ1toQQ0':{'min':0.001,'max':1.0,'Monash':0.0275,'block':3,'category':'StringFlav'},
+                 'etaSup':{'min':0.001,'max':1.0,'Monash':0.6,'block':3,'category':'StringFlav'},
+                 'etaPrimeSup':{'min':0.001,'max':1.0,'Monash':1.0,'block':3,'category':'StringFlav'},
+                 'decupletSup':{'min':0.001,'max':1.0,'Monash':1.0,'block':3,'category':'StringFlav'},
+                 'mesonUDvector':{'min':0.001,'max':3.0,'Monash':0.5,'block':3,'category':'StringFlav'},
+                 'mesonSvector':{'min':0.001,'max':3.0,'Monash':0.55,'block':3,'category':'StringFlav'},
+                 'mesonCvector':{'min':0.001,'max':3.0,'Monash':0.88,'block':3,'category':'StringFlav'},
+                 'mesonBvector':{'min':0.001,'max':3.0,'Monash':2.2,'block':3,'category':'StringFlav'}
                 }
     with open('{}/utils/all_pars_dict.json'.format(WorkHOME),'w') as all_pars_dict:
         json.dump(pars_info,all_pars_dict,sort_keys=True, indent=4)
