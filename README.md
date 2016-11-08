@@ -22,7 +22,8 @@ The framework should now be ready to use. If you like, you are welcome to famili
 **STEP 2: Set up the tune**
 
 The tuning configuration is specified in the `tune_config.json` file at the top-level directory. The user should specify all the variables in this json file. The meaning of these variables are explained below: 
-1. `WorkHOME`: the highest-level directory of this TuneMC framework 
+
+- `WorkHOME`: the highest-level directory of this TuneMC framework 
 - `N_events`: number of PYTHIA events to generate per query 
 - `n_cores`: number of virtual cores to parallelize the PYTHIA event generation, e.g. if `N_events` is 100,000 and `n_cores` is 5, then the generation is parallelized with 5 processes and each core generates 20,000 events 
 - `block1(2,3)`: the "block" to tune. The meaning of these blocks is described in our [article](https://arxiv.org/abs/1610.08328). Block1 is a 3-parameter tuning problem, while block2 and block3 have 6 and 11 parameters respectively. Whether to tune a block is specified by a Pythonic boolean, "True" or "False". At least one of the three needs to be "True", you can also choose to turn on two or even all three blocks 
@@ -42,7 +43,7 @@ One can simply "ctrl+c" the `master.py` process directly at any time. Spearmint 
  
 ### Disclaimers
 
-1. The method of using Bayesian optimization to the Monte Carlo event generator tuning problem is in principle independent on the specific generator used as long as the generator of interest contains free parameter that need to be determined by comparing with data. We picked PYTHIA just as an example. 
+-  The method of using Bayesian optimization to the Monte Carlo event generator tuning problem is in principle independent on the specific generator used as long as the generator of interest contains free parameter that need to be determined by comparing with data. We picked PYTHIA just as an example. 
 
 - In addition, one could imagine applying other Bayesian optimization packages to this MC event generator tuning problem. The interface is provided by just calling the `get_objective_func()` function defined in `$WorkHOME/pythia_space/pythia_functions.py`. One can look at `$WorkHOME/spearmint_space/Spearmint-Pythia-Tune.py` as an example.  
 

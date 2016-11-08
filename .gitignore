@@ -12,8 +12,8 @@ interface/**
 
 spearmint_space/output/**
 !spearmint_space/output/.gitkeep
-spearmint_space/Plots/**
-!spearmint_space/Plots/.gitkeep
+spearmint_space/plots/**
+!spearmint_space/plots/.gitkeep
 
 results/**
 !results/.gitkeep
