@@ -7,10 +7,10 @@ config = load_config('tune_config.json')
 WorkHOME = config['WorkHOME']
 
 
-File_Key = '1105_block2_70'
+File_Key = '1107_block3_575'
 
 TextsDir = '{}/interface'.format(WorkHOME)
-PlotsDir = '{}/spearmint_space/Plots'.format(WorkHOME)
+PlotsDir = '{}/spearmint_space/plots'.format(WorkHOME)
 
 ResultsDir = '{}/results/{}'.format(WorkHOME,File_Key)
 

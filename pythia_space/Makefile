@@ -1,10 +1,8 @@
-PYTHIA8_BIN=/Users/Yunjie/pythia8212/bin
-PYTHIA8_INCLUDE=/Users/Yunjie/pythia8212/include
-PYTHIA8_LIB=/Users/Yunjie/pythia8212/lib
-PYTHIA8_SHARE=/Users/Yunjie/pythia8212/share/Pythia8
 
+PYTHIA8_HOME=/Users/Yunjie/pythia8212
 
-ENABLE_SHARED=true
+PYTHIA8_INCLUDE=$(PYTHIA8_HOME)/include
+PYTHIA8_LIB=$(PYTHIA8_HOME)/lib
 
 CXX=g++
 CXX_COMMON=-O2 -pedantic -W -Wall -Wshadow -fPIC

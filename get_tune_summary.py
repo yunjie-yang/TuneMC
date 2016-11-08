@@ -27,7 +27,7 @@ with open('{}/pythia_space/pars_to_tune.txt'.format(WorkHOME),'r') as parsList:
 n_cores = config['n_cores']
 
 TextsDir = '{}/interface'.format(WorkHOME)
-PlotsDir = '{}/spearmint_space/Plots'.format(WorkHOME)
+PlotsDir = '{}/spearmint_space/plots'.format(WorkHOME)
 
 TimeIndexRemoval = [519]
 
