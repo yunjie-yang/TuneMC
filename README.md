@@ -26,10 +26,10 @@ The tuning configuration is specified in the `tune_config.json` file at the top-
 - `WorkHOME`: the highest-level directory of this TuneMC framework 
 - `N_events`: number of PYTHIA events to generate per query 
 - `n_cores`: number of virtual cores to parallelize the PYTHIA event generation, e.g. if `N_events` is 100,000 and `n_cores` is 5, then the generation is parallelized with 5 processes and each core generates 20,000 events 
-- `block1(2,3)`: the "block" to tune. The meaning of these blocks is described in our [article](https://arxiv.org/abs/1610.08328). Block1 is a 3-parameter tuning problem, while block2 and block3 have 6 and 11 parameters respectively. Whether to tune a block is specified by a Pythonic boolean, "True" or "False". At least one of the three needs to be "True", you can also choose to turn on two or even all three blocks 
+- `block1(2,3)`: the "block" to tune. The meaning of these blocks is described in our [article](https://arxiv.org/abs/1610.08328). Block1 is a 3-parameter tuning problem, while block2 and block3 have 6 and 11 parameters respectively. Whether to tune a block is specified by a Pythonic boolean, `"True"` or `"False"`. At least one of the three needs to be `"True"`, you can also choose to turn on two or even all three blocks 
 - `spearmint_dir`: this points to the `Spearmint/spearmint` directory of your Spearmint installation, where the Spearmint `main.py` file is found 
 - `spearmint_expt_name`: the name of the current spearmint tuning experiment. It is used by the MongoDB database used by Spearmint to associate tuning information with the corresponding experiment 
-- `new_expt`: a boolean variable used to specify whether you want to continue with an existing experiment (when you specify this to be "False") or you want to start a new experiment (when you set it to "True") 
+- `new_expt`: a boolean variable used to specify whether you want to continue with an existing experiment (when you specify this to be `"False"`) or you want to start a new experiment (when you set it to `"True"`) 
 
 **STEP 3: Run the tune**
 Now you should be able to run a MC tuning by simply executing the `master.py` code with command `$ python master.py` at the top-level 
