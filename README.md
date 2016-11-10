@@ -15,7 +15,7 @@ where you can also find much more details about the method and background inform
 
 1. Follow the instructions on [Spearmint](https://github.com/HIPS/Spearmint) (a Bayesian optimization realization in Python) and [PYTHIA](http://home.thep.lu.se/Pythia/) (a popular Monte Carlo event generator widely used in High Energy Physics event simulation, e.g. LHC physics) to install both software. (Note: no special package flags are needed during Pythia installation.) 
 2. Git clone the TuneMC code. 
-3. In `./pythia_space`, complile `pythia_gen.cc` with a `PYTHIA_HOME` argument set to the top-level directory of your installation, i.e. compile it by typing `$ make PYTHIA_HOME=<path/to/pythia/top-level>` 
+3. In `./pythia_space`, complile `pythia_gen.cc` with a `PYTHIA8_HOME` argument set to the top-level directory of your installation, i.e. compile it by typing `$ make PYTHIA8_HOME=<path/to/pythia/top-level>` 
 
 The framework should now be ready to use. If you like, you are welcome to familiarize yourself with basic usage of Spearmint and/or PYTHIA by looking at the examples they provide.
 
@@ -32,7 +32,8 @@ The tuning configuration is specified in the `tune_config.json` file at the top-
 - `new_expt`: a boolean variable used to specify whether you want to continue with an existing experiment (when you specify this to be `"False"`) or you want to start a new experiment (when you set it to `"True"`) 
 
 **STEP 3: Run the tune**
-Now you should be able to run a MC tuning by simply executing the `master.py` code with command `$ python master.py` at the top-level 
+
+Now you should be able to run a MC tuning by simply executing the `master.py` code with command `$ python master.py <tune_config.json>` at the top-level, where `<tune_config.json>` should be the config file described in the previous step. 
 
 ### Monitor/visualize the tuning progress
 This part is not indispensible but provided for the convenience of monitoring the tuning progress. One can run `$ python get_tune_summay.py` once the tuning is up and running. It will generate a few plots that help monitoring the tuning progress. The plots are generated in the `./spearmint_space/plots` directory. The `save_results.py` code is provided for convenience to save a particular tune experiments.

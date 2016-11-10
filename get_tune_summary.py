@@ -29,7 +29,9 @@ n_cores = config['n_cores']
 TextsDir = '{}/interface'.format(WorkHOME)
 PlotsDir = '{}/spearmint_space/plots'.format(WorkHOME)
 
-TimeIndexRemoval = [519]
+# If you happen to stop a tune and resume it later, you can first find out which index this time-break corresponds to from the print-out, and then add those indices to this list. 
+TimeIndexRemoval = []
+
 
 NEW = True
 #NEW = False
