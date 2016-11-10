@@ -1,10 +1,13 @@
 import os
+import sys
 import json
 from utils.general_utils import load_config,str_to_bool,params_to_tune,generate_pars_dict
 from utils.spearmint_utils import start_spearmint_tune
 
-def main():
-    config = load_config('tune_config.json') 
+def main(config_file):
+
+    print config_file
+    config = load_config(config_file) 
     WorkHOME = config['WorkHOME']
     
     os.environ['WorkHOME'] = WorkHOME
@@ -25,4 +28,4 @@ def main():
     start_spearmint_tune(spearmint_dir,WorkHOME,new_expt)
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1])

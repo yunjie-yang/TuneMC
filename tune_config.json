@@ -3,10 +3,10 @@
   "WorkHOME" : "/Users/Yunjie/Documents/TuneMC",
   "N_events" : 1000000,
   "n_cores"  : 7,
-  "block1"   : "False",
+  "block1"   : "True",
   "block2"   : "False",
-  "block3"   : "True",
+  "block3"   : "False",
   "spearmint_dir"  : "/Users/Yunjie/Documents/Spearmint/spearmint",
-  "spearmint_expt_name" : "block3",
-  "new_expt" : "False"
+  "spearmint_expt_name" : "block1",
+  "new_expt" : "True"
 }

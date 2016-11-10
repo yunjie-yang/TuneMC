@@ -15,7 +15,7 @@ where you can also find much more details about the method and background inform
 
 1. Follow the instructions on [Spearmint](https://github.com/HIPS/Spearmint) (a Bayesian optimization realization in Python) and [PYTHIA](http://home.thep.lu.se/Pythia/) (a popular Monte Carlo event generator widely used in High Energy Physics event simulation, e.g. LHC physics) to install both software. (Note: no special package flags are needed during Pythia installation.) 
 2. Git clone the TuneMC code. 
-3. In `./pythia_space/MakeFile`, change the `PYTHIA_HOME` variable to the top-level directory of your installation, and just type `make` to compile the `pythia_gen.cc` code. 
+3. In `./pythia_space`, complile `pythia_gen.cc` with a `PYTHIA_HOME` argument set to the top-level directory of your installation, i.e. compile it by typing `$ make PYTHIA_HOME=<path/to/pythia/top-level>` 
 
 The framework should now be ready to use. If you like, you are welcome to familiarize yourself with basic usage of Spearmint and/or PYTHIA by looking at the examples they provide.
 
